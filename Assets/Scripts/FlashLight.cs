@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class FlashLight : MonoBehaviour
 {
     [SerializeField]
     PolygonCollider2D flashLightCollider;
     [SerializeField]
-    Light2D light2D;
+    UnityEngine.Rendering.Universal.Light2D light2D;
 
     public float maxBrightness;
     public float minBrightness;
@@ -23,7 +23,7 @@ public class FlashLight : MonoBehaviour
     private void Start()
     {
         flashLightCollider = GetComponent<PolygonCollider2D>();
-        light2D = GetComponentInChildren<Light2D>();
+        light2D = GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>();
         light2D.intensity = maxBrightness;
         flashLightCollider.enabled = false;
         light2D.enabled = false;

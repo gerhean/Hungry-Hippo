@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 /// <credits>
 /// Original Author: SeksitSeeton
@@ -20,9 +20,9 @@ public class ShadowCaster2DTileMap : MonoBehaviour
     private CompositeCollider2D tilemapCollider;
 
 
-    static readonly FieldInfo meshField = typeof(ShadowCaster2D).GetField("m_Mesh", BindingFlags.NonPublic | BindingFlags.Instance);
-    static readonly FieldInfo shapePathField = typeof(ShadowCaster2D).GetField("m_ShapePath", BindingFlags.NonPublic | BindingFlags.Instance);
-    static readonly MethodInfo generateShadowMeshMethod = typeof(ShadowCaster2D)
+    static readonly FieldInfo meshField = typeof(UnityEngine.Rendering.Universal.ShadowCaster2D).GetField("m_Mesh", BindingFlags.NonPublic | BindingFlags.Instance);
+    static readonly FieldInfo shapePathField = typeof(UnityEngine.Rendering.Universal.ShadowCaster2D).GetField("m_ShapePath", BindingFlags.NonPublic | BindingFlags.Instance);
+    static readonly MethodInfo generateShadowMeshMethod = typeof(UnityEngine.Rendering.Universal.ShadowCaster2D)
                                     .Assembly
                                     .GetType("UnityEngine.Experimental.Rendering.Universal.ShadowUtility")
                                     .GetMethod("GenerateShadowMesh", BindingFlags.Public | BindingFlags.Static);
@@ -44,7 +44,7 @@ public class ShadowCaster2DTileMap : MonoBehaviour
             GameObject shadowCaster = new GameObject("shadow_caster_" + i);
             shadowCaster.transform.parent = gameObject.transform;
             shadowCaster.transform.localPosition = new Vector3(0f, 0f, 0f);
-            ShadowCaster2D shadowCasterComponent = shadowCaster.AddComponent<ShadowCaster2D>();
+            UnityEngine.Rendering.Universal.ShadowCaster2D shadowCasterComponent = shadowCaster.AddComponent<UnityEngine.Rendering.Universal.ShadowCaster2D>();
             shadowCasterComponent.selfShadows = this.selfShadows;
 
             Vector3[] testPath = new Vector3[pathVertices.Length];
